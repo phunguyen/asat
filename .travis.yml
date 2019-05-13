@@ -3,5 +3,6 @@ deploy:
   skip_cleanup: true
   github_token: 902d7ef326b2ca568880139c82694df14e97c80b
   keep_history: true
+  local_dir: dist
   on:
     branch: master
