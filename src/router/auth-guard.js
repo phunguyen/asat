@@ -1,7 +1,8 @@
 import store from '../store'
 
 export default (to, from, next) => {
-	if(store.getters.user) {
+	// const currentUser = firebase.auth().currentUser
+	if (store.getters.user) {
 		next()
 	} else {
 		next('/login')

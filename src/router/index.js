@@ -8,6 +8,8 @@ import AuthGuard from './auth-guard'
 Vue.use(Router)
 
 export default new Router({
+  base: '/asat',
+  mode: 'history',
   routes: [
     {
       path: '*',

@@ -15,6 +15,14 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="logOut">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed app v-if="logged">
@@ -22,10 +30,11 @@
       <v-toolbar-title>ASAT</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <router-view></router-view>
+      <router-view v-if="!firstLoading"></router-view>
+      <div v-else>Loading...</div>
     </v-content>
     <v-footer app>
-      <span class="black--text">&copy; 2019</span>
+      <span class="black--text">&nbsp;&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
@@ -38,14 +47,22 @@
     computed: {
       menuItems () {
         let menuItems = [
-          {title: 'Sign up', icon: 'face', link: '/signup'},
-          {title: 'Sign in', icon: 'lock_open', link: '/signin'},
+          {title: 'Users', icon: 'face', link: '/user'},
+          {title: 'Exams', icon: 'lock_open', link: '/exam'},
         ]
         return menuItems
       },
       logged () {
         return this.$store.getters.user !== null
+      },
+      firstLoading () {
+        return this.$store.getters.firstLoading
       }
-    }
+    },
+    methods: {
+      logOut () {
+        this.$store.dispatch('logOut')
+      }
+    },
   }
 </script>

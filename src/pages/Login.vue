@@ -14,7 +14,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="login">Login</v-btn>
+            <v-btn @click="logIn">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -29,7 +29,7 @@
       password: '',
     }),
     methods: {
-      login () {
+      logIn () {
         this.$store.dispatch('logIn', {
           email: this.email,
           password: this.password

@@ -1,25 +1,25 @@
+const { dataApi } = require('../../services/dataApi')
+
 export default {
   state: {
     user: null
   },
   mutations: {
-    setUser (state, payload) {
+    SET_USER (state, payload) {
 			state.user = payload
 		}
   },
   actions: {
-    logIn ( { commit }, payload) {
-      const loginUser = {
-        id: 1,
-        payload: payload
-      }
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          commit('setUser', loginUser)
-          resolve()
-        }, 500)
+    async logIn ( { commit }, payload) {
+      await dataApi.logIn(payload).then(user => {        
+        commit('SET_USER', user.user)
       })
     },
+    async logOut ( { commit }) {
+      await dataApi.logOut().then(() => {
+        commit('SET_USER', null)
+      })
+    }
   },
   getters: {
     user: state => state.user
