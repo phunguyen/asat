@@ -4,7 +4,7 @@ const firebaseApi = {
   logIn(payload) {
     return new Promise((resolve, reject) => {
       fb.auth.signInWithEmailAndPassword(payload.email, payload.password).then(user => {
-        resolve(user)
+        resolve(user.user)
       }).catch(err => {
         reject(err)
       })
@@ -13,19 +13,29 @@ const firebaseApi = {
   signUp(payload) {
     return new Promise((resolve, reject) => {
       fb.auth.createUserWithEmailAndPassword(payload.email, payload.password).then(user => {
-        resolve(user)
+        resolve(user.user)
       }).catch(err => {
         reject(err)
       })
     })
   },
-  createUser(payload) {
+  addUserInfo(payload) {
     return new Promise((resolve, reject) => {
       fb.usersCollection.doc(payload.uid).set({
         name: payload.name,
-        title: payload.title
-      }).then(() => {
-        resolve()
+        phone: payload.phone,
+        birthdate: payload.date
+      }).then(res => {
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  getUserInfo(payload) {
+    return new Promise((resolve, reject) => {
+      fb.usersCollection.doc(payload.uid).get().then(res => {
+        resolve(res.data())
       }).catch(err => {
         reject(err)
       })

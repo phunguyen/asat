@@ -7,6 +7,16 @@
       v-if="logged"
     >
       <v-list dense>
+        <v-list-tile avatar v-if="userInfo">
+          <v-list-tile-avatar>
+            <img src="https://www.groundai.com/static/groundai/img/avatar-placeholder.png">
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ userInfo.name }}</v-list-tile-title>
+            <v-list-tile-sub-title v-html="userInfo.phone"></v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider></v-divider>
         <v-list-tile v-for="item in menuItems" :to="item.link" :key="item.title">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -52,6 +62,9 @@
         ]
         return menuItems
       },
+      userInfo () {
+        return this.$store.getters.userInfo
+      },
       logged () {
         return this.$store.getters.user !== null
       },
@@ -62,6 +75,7 @@
     methods: {
       logOut () {
         this.$store.dispatch('logOut')
+        this.$router.push('/login')
       }
     },
   }

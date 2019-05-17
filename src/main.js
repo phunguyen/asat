@@ -17,6 +17,7 @@ new Vue({
     dataApi.onAuthStateChanged().then(user => {
       if (user) {
         store.commit('SET_USER', user)
+        store.dispatch('getUserInfo', user)
         router.push('/')
       }
       store.commit('SET_FIRST_LOADING', false)
