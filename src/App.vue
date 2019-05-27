@@ -35,7 +35,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app v-if="logged">
+    <v-toolbar fixed app v-if="logged" flat>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>ASAT</v-toolbar-title>
     </v-toolbar>

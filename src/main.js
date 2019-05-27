@@ -18,8 +18,8 @@ new Vue({
       if (user) {
         store.commit('SET_USER', user)
         store.dispatch('getUserInfo', user)
-        router.push('/')
       }
+      router.push('/')
       store.commit('SET_FIRST_LOADING', false)
     })
   },
